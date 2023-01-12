@@ -11,4 +11,13 @@ public class UserRegister {
     private String username;
     private String password;
     private String password2;
+    private String firstName;
+    private String lastName;
+    private String street;
+    private int houseNumber;
+    private int apartmentNumber;
+    private String country;
+    private String city;
+    private String zipCode;
+    private int phoneNumber;
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderunner.championsposa.domain.User;
+import pl.coderunner.championsposa.dto.UserRegister;
 import pl.coderunner.championsposa.service.SpringDataUserDetailsService;
 import pl.coderunner.championsposa.service.UserService;
 
@@ -49,7 +50,8 @@ public class HomeController {
     }
 
     @RequestMapping("/register")
-    public String register(){
+    public String register(Model model){
+        model.addAttribute("userregister",new UserRegister());
         return "register";
     }
 
