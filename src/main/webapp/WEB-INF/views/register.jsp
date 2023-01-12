@@ -16,7 +16,7 @@
 
 
 register!!!!!!
-<form:form method="post"  action="/login/register" modelAttribute="userregister">
+<form:form method="post"  action="/register" modelAttribute="userregister">
 
     <form:input path="username" type="email" name="username" placeholder="Email" />
     <br>
