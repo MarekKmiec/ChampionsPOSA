@@ -10,6 +10,7 @@ import pl.coderunner.championsposa.domain.User;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Service
 public class SpringDataUserDetailsService implements UserDetailsService {
     private final UserService userService;
@@ -17,7 +18,6 @@ public class SpringDataUserDetailsService implements UserDetailsService {
     public SpringDataUserDetailsService(UserService userService) {
         this.userService = userService;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) {
