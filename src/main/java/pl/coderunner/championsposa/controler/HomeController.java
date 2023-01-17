@@ -1,7 +1,6 @@
 package pl.coderunner.championsposa.controler;
 
 
-
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -14,6 +13,8 @@ import pl.coderunner.championsposa.service.SpringDataUserDetailsService;
 import pl.coderunner.championsposa.service.UserService;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Controller
@@ -37,6 +38,11 @@ public class HomeController {
         return "logged";
     }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "index";
+    }
+
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login(Model model) {
@@ -53,36 +59,25 @@ public class HomeController {
 
     @RequestMapping("/register")
     public String register(Model model) {
-        model.addAttribute("userregister", new UserRegister());
+        model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String registered(@Valid @ModelAttribute("userregister") UserRegister userRegister, BindingResult result, Model model) {
+    public String registered(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("user", user);
             return "register";
-        } else {
-            User user = new User();
-            if (userRegister.getPassword().equals(userRegister.getPassword2())) {
-                user.setUsername(userRegister.getUsername());
-                user.setPassword(userRegister.getPassword());
-                user.setFirstName(userRegister.getFirstName());
-                user.setLastName(userRegister.getLastName());
-                user.setStreet(userRegister.getStreet());
-                user.setHouseNumber(userRegister.getHouseNumber());
-                user.setApartmentNumber(userRegister.getApartmentNumber());
-                user.setCountry(userRegister.getCountry());
-                user.setCity(userRegister.getCity());
-                user.setZipCode(userRegister.getZipCode());
-                user.setPhoneNumber(userRegister.getPhoneNumber());
-                userService.saveUser(user);
-                return "redirect:/index";
-
-            } else {
-                throw new WrongPassword("różne hasła");
-            }
-
         }
+        if (!user.getPassword().equals(user.getMatchingPassword())) {
+            result.rejectValue("passowrd", "error.user", "Podane hasła są różne");
+            model.addAttribute("user", user);
+            return "register";
+        }
+        user.setLocalDate(LocalDate.now());
+        user.setLocalTime(LocalTime.now());
+        userService.saveUser(user);
+        return "redirect:/index";
     }
 }
 

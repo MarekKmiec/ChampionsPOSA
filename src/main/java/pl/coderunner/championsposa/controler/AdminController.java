@@ -32,7 +32,7 @@ public class AdminController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable long id,Model model){
         model.addAttribute("user",userServiceImpl.findById(id));
-        return "useredit";
+        return "register";
     }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable long id){

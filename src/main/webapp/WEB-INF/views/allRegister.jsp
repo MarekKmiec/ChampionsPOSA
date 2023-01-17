@@ -68,9 +68,9 @@
             <td><c:out value="${u.phoneNumber}"/></td>
 
 
-            <td><a href="<c:url value="/userform/delete/${u.id}"/>"
+            <td><a href="<c:url value="/admin/delete/${u.id}"/>"
                    onclick="return confirm('Are you sure you want to delete user \'${u.username}\'?')">Delete</a>
-                <br><a href="<c:url value="/userform/edit/${u.id}"/>">Edit</a></td>
+                <br><a href="<c:url value="/admin/edit/${u.id}"/>">Edit</a></td>
         </tr>
     </c:forEach>
 </table>

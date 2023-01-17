@@ -25,6 +25,8 @@ public class UserRegister {
     @Column(length = 100)
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-6])(?=.*?[#?!@$%^&*-]).{6,100}$", message = "{weak.password}")
     private String password;
+
+
     @NotEmpty(message = "Hasło nie moę być puste")
     @Column(length = 100)
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-6])(?=.*?[#?!@$%^&*-]).{6,100}$", message = "{weak.password}")

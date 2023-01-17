@@ -14,20 +14,43 @@
         .errors {
             color: red;
         }
+
+        th {
+            color: rgb(255, 255, 255);
+            border: 1px solid rgb(219, 219, 219);
+            font-weight: normal;
+            background-color: rgb(124, 124, 125);
+        }
+        table {
+            border-collapse: collapse;
+        }
+        td {
+            color: rgb(77, 77, 79);
+            border: 1px solid rgb(219, 219, 219);
+            background-color: rgb(231, 231, 231);
+        }
+        td, th {
+            padding: 15px 20px;
+        }
     </style>
 </head>
 <body>
-
+<table>
+    <tr>
+        <th> Formularz rejestracyjny</th>
+    </tr>
 
 
 register!!!!!!
-<form:form method="post"  action="/register" modelAttribute="userregister">
+<form:form method="post"  action="/register" modelAttribute="user">
+<tr>
+    <td>
 
     <form:input path="username" type="email" name="username" placeholder="Email" /><form:errors path="username" cssClass="errors"/>
     <br>
     <form:input path="password" type="password" name="password" placeholder="Hasło" /><form:errors path="password" cssClass="errors"/>
     <br>
-    <form:input path="password2" type="password" name="password2" placeholder="Powtórz hasło" /><form:errors path="password2" cssClass="errors"/>
+    <form:input path="matchingPassword" type="password" name="matchingPassword" placeholder="Powtórz hasło" /><form:errors path="matchingPassword" cssClass="errors"/>
     <br>
     <form:input path="firstName" type="txt" name="firstName" placeholder="Imię" /><form:errors path="firstName" cssClass="errors"/>
     <br>
@@ -35,11 +58,7 @@ register!!!!!!
     <br>
     <form:input path="street" type="txt" name="street" placeholder="Ulica" /><form:errors path="street" cssClass="errors"/>
     <br>
-    numer domu
-    <br>
     <form:input path="houseNumber" type="txt" name="houseNumber" placeholder="Numer domu" /><form:errors path="houseNumber" cssClass="errors"/>
-    <br>
-    numer mieszkania
     <br>
     <form:input path="apartmentNumber" type="txt" name="apartmentNumber" placeholder="Numer mieszkania" /><form:errors path="apartmentNumber" cssClass="errors"/>
     <br>
@@ -49,13 +68,11 @@ register!!!!!!
     <br>
     <form:input path="country" type="txt" name="country" placeholder="Obywatelstow" /><form:errors path="country" cssClass="errors"/>
     <br>
-    Numer telefonu
-    <br>
     <form:input path="phoneNumber" type="txt" name="phoneNumber" placeholder="Numer telefonu" /><form:errors path="phoneNumber" cssClass="errors"/>
     <br>
     <form:hidden path="id" />
-
-
+</td>
+    </table>
 
 
     <button class="btn" type="submit">Załóż konto</button>
