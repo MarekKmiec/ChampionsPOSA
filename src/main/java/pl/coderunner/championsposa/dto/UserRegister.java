@@ -1,13 +1,14 @@
 package pl.coderunner.championsposa.dto;
 
-import jakarta.persistence.Column;
-
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter

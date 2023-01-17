@@ -2,6 +2,7 @@ package pl.coderunner.championsposa.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderunner.championsposa.domain.Role;
 import pl.coderunner.championsposa.domain.User;
 import pl.coderunner.championsposa.repository.RoleRepository;
@@ -9,8 +10,10 @@ import pl.coderunner.championsposa.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -36,5 +39,8 @@ public class UserServiceImpl implements UserService {
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         userRepository.save(user);
 
+    }
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 }

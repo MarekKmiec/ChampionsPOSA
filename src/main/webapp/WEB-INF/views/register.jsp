@@ -53,6 +53,7 @@ register!!!!!!
     <br>
     <form:input path="phoneNumber" type="txt" name="phoneNumber" placeholder="Numer telefonu" /><form:errors path="phoneNumber" cssClass="errors"/>
     <br>
+<%--    <form:hidden path="id" />--%>
 
 
 

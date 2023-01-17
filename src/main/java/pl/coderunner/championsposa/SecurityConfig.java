@@ -20,10 +20,10 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .requestMatchers("/index").permitAll()
-                .requestMatchers("/register").permitAll()
-                .requestMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
-                .requestMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/index").permitAll()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/user/**").hasAnyRole("USER")
                 .and().formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/");

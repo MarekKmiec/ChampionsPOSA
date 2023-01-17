@@ -2,7 +2,6 @@ package pl.coderunner.championsposa.controler;
 
 
 
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -14,7 +13,7 @@ import pl.coderunner.championsposa.exceptions.WrongPassword;
 import pl.coderunner.championsposa.service.SpringDataUserDetailsService;
 import pl.coderunner.championsposa.service.UserService;
 
-
+import javax.validation.Valid;
 
 
 @Controller
