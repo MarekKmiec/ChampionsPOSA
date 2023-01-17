@@ -8,25 +8,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <meta charset="UTF-8">
     <title>dziala</title>
 </head>
 <body>
 
+Zalogowany!!!!
+<ul >
 
+</ul>
 
-index!!!!!!!
-<%--<form:form method="post"  action="/login/register" modelAttribute="userregister">--%>
-
-<%--    <form:input path="username" type="email" name="username" placeholder="Email" />--%>
-
-<%--    <form:input path="password" type="password" name="password" placeholder="Hasło" />--%>
-
-<%--    <form:input path="password2" type="password" name="password2" placeholder="Powtórz hasło" />--%>
-
-
-<%--    <button class="btn" type="submit">Załóż konto</button>--%>
-
-<%--</form:form>--%>
 </body>
 </html>

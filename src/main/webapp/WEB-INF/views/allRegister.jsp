@@ -12,74 +12,70 @@
 
 
 
-
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>dziala</title>
+    <title>User</title>
 </head>
+<style>
+    th {
+        color: rgb(255, 255, 255);
+        border: 1px solid rgb(219, 219, 219);
+        font-weight: normal;
+        background-color: rgb(124, 124, 125);
+    }
+    table {
+        border-collapse: collapse;
+    }
+    td {
+        color: rgb(77, 77, 79);
+        border: 1px solid rgb(219, 219, 219);
+        background-color: rgb(231, 231, 231);
+    }
+    td, th {
+        padding: 15px 20px;
+    }
+</style>
 <body>
+<h2>Lista użytkowników</h2>
+<table>
+    <tr>
+        <th>Email</th>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Kraj</th>
+        <th>Miasto</th>
+        <th>Ulica</th>
+        <th>Numer domu</th>
+        <th>Numer mieskania</th>
+        <th>Kod pocztowy</th>
+        <th>Numer telefonu</th>
+        <th>Action</th>
 
-allRegister!!!!
 
-<c:forEach items="${user}" var="u">
-    <c:out value="${u.username}"></c:out>
-</c:forEach>
-<%--<c:out value="${1+1}"/>--%>
-<%--<c:out value="<b> bold text </b>" escapeXml="false"/>--%>
 
+    </tr>
+    <c:forEach items="${user}" var="u">
+        <tr>
+            <td><c:out value="${u.username}"/></td>
+            <td><c:out value="${u.firstName}"/></td>
+            <td><c:out value="${u.lastName}"/></td>
+            <td><c:out value="${u.country}"/></td>
+            <td><c:out value="${u.city}"/></td>
+            <td><c:out value="${u.street}"/></td>
+            <td><c:out value="${u.houseNumber}"/></td>
+            <td><c:out value="${u.apartmentNumber}"/></td>
+            <td><c:out value="${u.zipCode}"/></td>
+            <td><c:out value="${u.phoneNumber}"/></td>
+
+
+            <td><a href="<c:url value="/userform/delete/${u.id}"/>"
+                   onclick="return confirm('Are you sure you want to delete user \'${u.username}\'?')">Delete</a>
+                <br><a href="<c:url value="/userform/edit/${u.id}"/>">Edit</a></td>
+        </tr>
+    </c:forEach>
+</table>
+<a href="<c:url value="/register"/>">Add User</a><br>
+<a href="<c:url value="/event/list"/>">ListEvent</a><br>
 </body>
 </html>
-<%--<html>--%>
-<%--<head>--%>
-<%--    <title>User</title>--%>
-<%--    <meta charset="utf-8">--%>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1">--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-<%--          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">--%>
-<%--</head>--%>
-<%--<style>--%>
-<%--    /*th {*/--%>
-<%--    /*  color: rgb(255, 255, 255);*/--%>
-<%--    /*  border: 1px solid rgb(219, 219, 219);*/--%>
-<%--    /*  font-weight: normal;*/--%>
-<%--    /*  background-color: rgb(124, 124, 125);*/--%>
-<%--    /*}*/--%>
-<%--    /*table {*/--%>
-<%--    /*  border-collapse: collapse;*/--%>
-<%--    /*}*/--%>
-<%--    /*td {*/--%>
-<%--    /*  color: rgb(77, 77, 79);*/--%>
-<%--    /*  border: 1px solid rgb(219, 219, 219);*/--%>
-<%--    /*  background-color: rgb(231, 231, 231);*/--%>
-<%--    /*}*/--%>
-<%--    /*td, th {*/--%>
-<%--    /*  padding: 15px 20px;*/--%>
-<%--    /*}*/--%>
-<%--</style>--%>
-<%--<body>--%>
-<%--<h3>Lista użytkowników</h3>--%>
-<%--<table class="table table-striped ">--%>
-<%--    <tr>--%>
-<%--        <th>User name</th>--%>
-<%--        <th>phoneNumber</th>--%>
-<%--        <th>action</th>--%>
 
-<%--    </tr>--%>
-<%--    <c:forEach items="${user}" var="u">--%>
-<%--        <tr>--%>
-<%--            <td><c:out value="${u.username}"/></td>--%>
-<%--            <td><c:out value="${u.phoneNumber}"/></td>--%>
-<%--            <td><a href="<c:url value="/userform/delete/${u.id}"/>"--%>
-<%--                   onclick="return confirm('Are you sure you want to delete user \'${u.name}\'?')">Delete</a>--%>
-<%--                <br><a href="<c:url value="/userform/edit/${u.id}"/>">Edit</a></td>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
-<%--</table>--%>
-<%--<a href="<c:url value="/userform/add"/>">Add User</a><br>--%>
-<%--<a href="<c:url value="/expense/list"/>">List Expenses</a><br>--%>
-<%--<a href="<c:url value="/event/list"/>">ListEvent</a><br>--%>
-<%--</body>--%>
-<%--</html>--%>

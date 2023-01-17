@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class UserRegister {
+    private long id;
     @NotEmpty(message = "Wpisz adres email")
     @Email(message = "Niepoprawny format adresu email")
     @Size(max = 60,message = "Maksymalna długość adresu email to 60 znaków")

@@ -32,6 +32,11 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping("/logged")
+    public String logged() {
+        return "logged";
+    }
+
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String login(Model model) {
@@ -44,12 +49,6 @@ public class HomeController {
         String user1 = user.getUsername();
         springDataUserDetailsService.loadUserByUsername(user1);
         return "redirect:/index";
-    }
-
-
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
     }
 
     @RequestMapping("/register")

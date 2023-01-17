@@ -1,27 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
-<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>--%>
-<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>--%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <title>dziala</title>
-    <style>
-        .errors {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-
-
-
-register!!!!!!
-<form:form method="post"  action="/register" modelAttribute="userregister">
+<form:form method="post"  action="/register" modelAttribute="user">
 
     <form:input path="username" type="email" name="username" placeholder="Email" /><form:errors path="username" cssClass="errors"/>
     <br>
@@ -53,13 +30,11 @@ register!!!!!!
     <br>
     <form:input path="phoneNumber" type="txt" name="phoneNumber" placeholder="Numer telefonu" /><form:errors path="phoneNumber" cssClass="errors"/>
     <br>
-    <form:hidden path="id" />
+    <%--    <form:hidden path="id" />--%>
 
 
 
 
-    <button class="btn" type="submit">Załóż konto</button>
+    <button class="btn" type="submit">uaktualnij dane</button>
 
 </form:form>
-</body>
-</html>

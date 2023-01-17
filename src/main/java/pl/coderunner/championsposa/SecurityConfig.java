@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .antMatchers("/user/**").hasAnyRole("USER")
                 .and().formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/logged");
 
         return http.build();
     }
