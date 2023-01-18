@@ -41,12 +41,12 @@
     </tr>
 
 
-register!!!!!!
+
 <form:form method="post"  action="/register" modelAttribute="user">
 <tr>
     <td>
 
-    <form:input path="username" type="email" name="username" placeholder="Email" /><form:errors path="username" cssClass="errors"/>
+    <form:input path="username" type="email" name="username" placeholder="Email"  /><form:errors path="username" cssClass="errors"/>
     <br>
     <form:input path="password" type="password" name="password" placeholder="Hasło" /><form:errors path="password" cssClass="errors"/>
     <br>

@@ -24,9 +24,10 @@ public class SecurityConfig {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/user/**").hasAnyRole("USER")
-                .and().formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/logged");
+                .and().formLogin().loginPage("/login")
+                .defaultSuccessUrl("/logged")
+                .and().logout().logoutSuccessUrl("/")
+                .permitAll();
 
         return http.build();
     }

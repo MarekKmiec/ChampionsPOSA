@@ -13,9 +13,9 @@
 </head>
 <body>
 
-użytkownik dodany!
+<h1>Użytkownik dodany!</h1>
 <ul >
-    <li><a href="/login" >Zaloguj</a></li>
+    <li><a href="/login" >Zaloguj się</a></li>
     <li><a href="/register" >Załóż konto</a></li>
 </ul>
 

@@ -17,7 +17,6 @@ public class UserRegister {
     @NotEmpty(message = "Wpisz adres email")
     @Email(message = "Niepoprawny format adresu email")
     @Size(max = 60,message = "Maksymalna długość adresu email to 60 znaków")
-    @NotEmpty(message = "Email nie może być pusty")
     @Column(nullable = false, unique = true, length = 60)
     private String username;
 

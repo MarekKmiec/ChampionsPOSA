@@ -44,13 +44,18 @@ public class User {
     private String firstName;
     @NotEmpty(message = "pole nie może być puste")
     private String lastName;
+    @NotEmpty(message = "pole nie może być puste")
     private String street;
+    @NotEmpty(message = "pole nie może być puste")
     private String houseNumber;
     private String apartmentNumber;
+    @NotEmpty(message = "pole nie może być puste")
     private String country;
+    @NotEmpty(message = "pole nie może być puste")
     private String city;
+    @NotEmpty(message = "pole nie może być puste")
     private String zipCode;
-
+    @NotEmpty(message = "pole nie może być puste")
     private String phoneNumber;
     private int enabled;
     @Column(name = "date")

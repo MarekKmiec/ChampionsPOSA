@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id){
         return userRepository.findById(id).orElseThrow();
     }
-    public void delete(Long id){
-        userRepository.deleteById(id);
+    public void deleteUser(Long id){
+        userRepository.deleteUser(id);
     }
 }
