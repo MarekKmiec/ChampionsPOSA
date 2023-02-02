@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderunner.championsposa.domain.User;
-import pl.coderunner.championsposa.dto.UserRegister;
+
 import pl.coderunner.championsposa.exceptions.WrongPassword;
 import pl.coderunner.championsposa.service.SpringDataUserDetailsService;
 import pl.coderunner.championsposa.service.UserService;
@@ -68,6 +68,13 @@ public class HomeController {
         if (result.hasErrors()) {
             model.addAttribute("user", user);
             return "register";
+        }
+        if(userService.findByUserName(user.getUsername()) !=null ) {
+            result.rejectValue("email","error.user","Taki Email już istnieje w bazie daych");
+            model.addAttribute("user",user);
+            return "register";
+
+
         }
         if (!user.getPassword().equals(user.getMatchingPassword())) {
             result.rejectValue("passowrd", "error.user", "Podane hasła są różne");
