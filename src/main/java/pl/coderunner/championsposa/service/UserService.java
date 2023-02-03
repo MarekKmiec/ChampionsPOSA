@@ -5,16 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.coderunner.championsposa.domain.Role;
 import pl.coderunner.championsposa.domain.User;
 import pl.coderunner.championsposa.repository.AuthorityRepository;
 import pl.coderunner.championsposa.repository.PersistentTokenRepository;
+import pl.coderunner.championsposa.repository.RoleRepository;
 import pl.coderunner.championsposa.repository.UserRepository;
-import pl.coderunner.championsposa.security.RandomUtil;
-import pl.coderunner.championsposa.service.dto.AdminUserDto;
+import pl.coderunner.championsposa.service.dto.UserDto;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 @Transactional
 @Service
@@ -23,32 +23,28 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final PersistentTokenRepository persistentTokenRepository;
-    private final AuthorityRepository authorityRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
-        this.authorityRepository = authorityRepository;
+        this.roleRepository = roleRepository;
+
     }
 
-    public User createUser(AdminUserDto adminUserDto){
-        User user=new User();
-        if(adminUserDto.getUsername() !=null){
-            user.setUsername(adminUserDto.getUsername().toLowerCase());
+    public User createUser(UserDto userDto) {
+        User user = new User();
+        if (userDto.getUsername() != null) {
+            user.setUsername(userDto.getUsername().toLowerCase());
         }
-        user.setImageUrl(adminUserDto.getImageUrl());
-        String encryptedPassword=passwordEncoder.encode(RandomUtil.generatePassword());
-        user.setPassword(encryptedPassword);
-        user.setResetKey(RandomUtil.generateResetKey());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setLocalDate(LocalDate.now());
-        user.setActivated(true);
-        if(adminUserDto.getRoles() !=null){
-
-        }
-
-
-
-return user;
+        user.setActivationKey(UUID.randomUUID().toString());
+        user.setActivated(false);
+        user.setRoles(Set.of(roleRepository.findByName("ROLE_USER")));
+        userRepository.save(user);
+        log.debug("Created Information for User: {}", user);
+        return user;
     }
 }
