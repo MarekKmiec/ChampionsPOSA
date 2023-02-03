@@ -6,13 +6,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderunner.championsposa.domain.User;
-import pl.coderunner.championsposa.repository.AuthorityRepository;
 import pl.coderunner.championsposa.repository.PersistentTokenRepository;
 import pl.coderunner.championsposa.repository.RoleRepository;
 import pl.coderunner.championsposa.repository.UserRepository;
 import pl.coderunner.championsposa.service.dto.UserDto;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,7 +25,8 @@ public class UserService {
     private final PersistentTokenRepository persistentTokenRepository;
     private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, RoleRepository roleRepository) {
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
@@ -46,5 +47,11 @@ public class UserService {
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
+    }
+
+    public Optional<User> activeRegistration(String key){
+        return userRepository.findOneByActivationKey(key).map(user->{user.setActivated(true); user.setActivationKey(null);
+        return user;
+        });
     }
 }
