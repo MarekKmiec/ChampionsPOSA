@@ -13,11 +13,26 @@
 </head>
 <body>
 
-git!
-<ul >
-    <li><a href="/login" >Zaloguj</a></li>
-    <li><a href="/register" >Załóż konto</a></li>
-</ul>
+<%--git!--%>
+<%--<ul >--%>
+<%--    <li><a href="/login" >Zaloguj</a></li>--%>
+<%--    <li><a href="/register" >Załóż konto</a></li>--%>
+<%--</ul>--%>
+
+<table>
+    <thead>
+    <tr>
+        <th th:text="#{msgs.headers.name}">Name</th>
+        <th th:text="#{msgs.headers.price}">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prod: ${allProducts}">
+        <td th:text="${prod.name}">Oranges</td>
+        <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">0.99</td>
+    </tr>
+    </tbody>
+</table>
 
 
 

@@ -38,20 +38,28 @@ public class UserService {
         User user = new User();
         if (userDto.getUsername() != null) {
             user.setUsername(userDto.getUsername().toLowerCase());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setLocalDate(LocalDate.now());
+            user.setActivationKey(UUID.randomUUID().toString());
+            user.setActivated(false);
+            user.setRoles(Set.of(roleRepository.findByName("ROLE_USER")));
+            userRepository.save(user);
+            log.debug("Created Information for User: {}", user);
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setLocalDate(LocalDate.now());
-        user.setActivationKey(UUID.randomUUID().toString());
-        user.setActivated(false);
-        user.setRoles(Set.of(roleRepository.findByName("ROLE_USER")));
-        userRepository.save(user);
-        log.debug("Created Information for User: {}", user);
+
         return user;
     }
 
-    public Optional<User> activeRegistration(String key){
-        return userRepository.findOneByActivationKey(key).map(user->{user.setActivated(true); user.setActivationKey(null);
-        return user;
-        });
+    public Optional<User> activeRegistration(String key) {
+        return userRepository.findOneByActivationKey(key)
+                .map(user -> {
+                    user.setActivated(true);
+                    user.setActivationKey(null);
+                    return user;
+                });
+    }
+
+    public User findUser(String username) {
+        return userRepository.findByUsername(username);
     }
 }

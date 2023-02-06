@@ -39,18 +39,21 @@ public class UserDto implements Serializable {
     private LocalDateTime createdOn;
     private LocalDateTime updateOn;
     private Set<String> roles;
-
-    public UserDto(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.activated = user.isActivated();
-        this.imageUrl = user.getImageUrl();
-        this.langKey = user.getLangKey();
-        this.localDate = user.getLocalDate();
-        this.localTime = user.getLocalTime();
-        this.createdOn = user.getCreatedOn();
-        this.updateOn = user.getUpdateOn();
-        this.roles=user.getRoles().stream().map(a->a.getName()).collect(Collectors.toSet());
-
-    }
+//
+//    public UserDto() {
+//
+//    }
+//
+//    public UserDto(User user) {
+//        this.id = user.getId();
+//        this.username = user.getUsername();
+//        this.activated = user.isActivated();
+//        this.imageUrl = user.getImageUrl();
+//        this.langKey = user.getLangKey();
+//        this.localDate = user.getLocalDate();
+//        this.localTime = user.getLocalTime();
+//        this.createdOn = user.getCreatedOn();
+//        this.updateOn = user.getUpdateOn();
+//        this.roles = user.getRoles().stream().map(a -> a.getName()).collect(Collectors.toSet());
+//    }
 }

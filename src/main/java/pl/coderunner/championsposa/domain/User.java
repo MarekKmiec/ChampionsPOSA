@@ -52,8 +52,8 @@ public class User {
     @Column(name = "image_url", length = 256)
     private String imageUrl;
 
-    @Size(max = 20)
-    @Column(name = "activation_key", length = 20)
+    @Size(max = 40)
+    @Column(name = "activation_key", length = 40)
     @JsonIgnore
     private String activationKey;
     @Size(max = 20)
@@ -85,11 +85,11 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles=new HashSet<>();
-    @OneToMany
-    private List<UserAddress> userAddress;
-    @OneToOne
-    private UserData userData;
-    @OneToMany
-    private List<UserPlayerProfile> playerProfileLiat;
+//    @OneToMany
+//    private List<UserAddress> userAddress;
+//    @OneToOne
+//    private UserData userData;
+//    @OneToMany
+//    private List<UserPlayerProfile> playerProfileLiat;
 
 }

@@ -1,32 +1,31 @@
-//package pl.coderunner.championsposa.controler;
-//
-//
-//import org.springframework.stereotype.Controller;
-//
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.*;
-//import pl.coderunner.championsposa.domain.User;
-//
-//import pl.coderunner.championsposa.exceptions.WrongPassword;
-//import pl.coderunner.championsposa.service.SpringDataUserDetailsService;
-//import pl.coderunner.championsposa.service.UserService;
-//
-//import javax.validation.Valid;
-//import java.time.LocalDate;
-//import java.time.LocalTime;
-//
-//
-//@Controller
-//public class HomeController {
-//
-//    private final SpringDataUserDetailsService springDataUserDetailsService;
-//    private final UserService userService;
-//
-//    public HomeController(SpringDataUserDetailsService springDataUserDetailsService, UserService userService) {
-//        this.springDataUserDetailsService = springDataUserDetailsService;
-//        this.userService = userService;
-//    }
+package pl.coderunner.championsposa.controler;
+
+
+import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import pl.coderunner.championsposa.domain.User;
+
+
+import pl.coderunner.championsposa.service.UserService;
+
+import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+
+@Controller
+public class HomeController {
+
+
+    private final UserService userService;
+
+    public HomeController(UserService userService) {
+        this.userService = userService;
+    }
+
 //
 //    @RequestMapping("/")
 //    public String home() {
@@ -53,7 +52,7 @@
 //    @PostMapping("login")
 //    public String logged(User user) {
 //        String user1 = user.getUsername();
-//        springDataUserDetailsService.loadUserByUsername(user1);
+//        userService.findUser(user1);
 //        return "redirect:/index";
 //    }
 //
@@ -62,14 +61,14 @@
 //        model.addAttribute("user", new User());
 //        return "register";
 //    }
-//
+
 //    @PostMapping("/register")
 //    public String registered(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 //        if (result.hasErrors()) {
 //            model.addAttribute("user", user);
 //            return "register";
 //        }
-//        if(userService.findByUserName(user.getUsername()) !=null ) {
+//        if(userService.findUser(user.getUsername()) !=null ) {
 //            result.rejectValue("email","error.user","Taki Email już istnieje w bazie daych");
 //            model.addAttribute("user",user);
 //            return "register";
@@ -83,10 +82,10 @@
 //        }
 //        user.setLocalDate(LocalDate.now());
 //        user.setLocalTime(LocalTime.now());
-//        userService.saveUser(user);
+//        userService.createUser(user);
 //        return "redirect:/index";
 //    }
-//}
-//
-//
-//
+}
+
+
+

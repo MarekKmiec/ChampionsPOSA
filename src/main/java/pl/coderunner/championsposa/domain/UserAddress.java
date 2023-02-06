@@ -13,16 +13,16 @@ public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @NotEmpty(message = "{street.notEmpty}")
+//    @NotEmpty(message = "{street.notEmpty}")
     private String street;
-    @NotEmpty(message = "{houseNumber.notEmpty}")
+//    @NotEmpty(message = "{houseNumber.notEmpty}")
     private String houseNumber;
     private String apartmentNumber;
-    @NotEmpty(message = "{country.notEmpty}")
+//    @NotEmpty(message = "{country.notEmpty}")
     private String country;
-    @NotEmpty(message = "{city.notEmpty}")
+//    @NotEmpty(message = "{city.notEmpty}")
     private String city;
-    @NotEmpty(message = "{zipCode.notEmpty}")
+//    @NotEmpty(message = "{zipCode.notEmpty}")
     private String zipCode;
 
 }

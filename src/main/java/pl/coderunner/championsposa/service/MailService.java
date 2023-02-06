@@ -56,8 +56,8 @@ public class MailService {
     public void sendEmailFromTemplate(User user, String templateName, String titleKey) throws MessagingException {
 
         Context context = new Context();
-        context.setVariable(USER, user.getActivationKey());
-        context.setVariable(BASE_URL, "http://localhost:8080/");
+        context.setVariable(USER, user);
+        context.setVariable(BASE_URL, "http://localhost:8080");
         String content = templateEngine.process(templateName, context);
         String subject = "Aktywacja konta";
         sendEmail(user.getUsername(), subject, content, false, true);
