@@ -47,7 +47,7 @@ public class MailService {
         MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, StandardCharsets.UTF_8.name());
         message.setTo(to);
         message.setSubject(subject);
-        message.setText(content);
+        message.setText(content,isHtml);
 
         javaMailSender.send(mimeMessage);
     }
@@ -65,6 +65,6 @@ public class MailService {
 
     @Async
     public void sendActivationEmail(User user) throws MessagingException {
-        sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title");
+        sendEmailFromTemplate(user, "mail/newActEmail", "email.activation.title");
     }
 }

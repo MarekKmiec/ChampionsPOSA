@@ -2,6 +2,7 @@ package pl.coderunner.championsposa.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import pl.coderunner.championsposa.repository.UserRepository;
 import java.util.Optional;
 
 @RestController
+
 @RequestMapping("/api")
 public class AccountResource {
 
@@ -32,10 +34,12 @@ public class AccountResource {
     }
 
     @GetMapping("/activate")
-    public void activateAccount(@RequestParam(value = "key") String key) {
+    public String activateAccount(@RequestParam(value = "key") String key) {
         Optional<User> user = userService.activeRegistration(key);
         if (user.isEmpty()) {
             throw new RuntimeException("rejestracja nie powiodła się ");
+        }else {
+            return "Użutkownik zarejstrowany";
         }
 
 

@@ -16,7 +16,7 @@ public class Register {
     @OneToOne
     private User user;
     @OneToMany
-    private List<Competitions> competitions;
+    private List<Competition> competitions;
     @OneToOne
     private CategoriesOfAge categoriesOfAge;
 

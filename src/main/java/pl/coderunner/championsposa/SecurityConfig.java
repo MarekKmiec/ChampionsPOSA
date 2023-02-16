@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 //@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
