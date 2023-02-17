@@ -13,6 +13,8 @@ public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    private String name;
+
     @OneToMany
-    private List<CategoriesOfAge> categories;
+    private List<CategoryOfAge> categoriesOfAge;
 }

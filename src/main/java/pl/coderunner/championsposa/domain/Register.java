@@ -18,6 +18,6 @@ public class Register {
     @OneToMany
     private List<Competition> competitions;
     @OneToOne
-    private CategoriesOfAge categoriesOfAge;
+    private CategoryOfAge categoriesOfAge;
 
 }

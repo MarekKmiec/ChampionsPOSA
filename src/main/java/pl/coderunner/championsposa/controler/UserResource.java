@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-//@RestController
+@RestController
 @RequestMapping("/api")
 public class UserResource {
 
@@ -38,11 +38,7 @@ public class UserResource {
         this.mailService = mailService;
     }
 
-    @RequestMapping("/user")
-    public String registerUser(Model model){
-        model.addAttribute("userDto",new UserDto());
-        return "userForm";
-    }
+
 
 
 

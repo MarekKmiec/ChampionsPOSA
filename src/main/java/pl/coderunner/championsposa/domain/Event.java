@@ -18,8 +18,8 @@ public class Event {
     @OneToOne
     private EventAddress eventAddress;
     private LocalDateTime localDate;
-    private String Administrator;
-    private String Description;
+    private String administrator;
+    private String description;
   ;
     @OneToMany
     private List<Competition> competitionsList;

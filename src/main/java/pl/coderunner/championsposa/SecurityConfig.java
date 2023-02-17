@@ -28,6 +28,7 @@ public class SecurityConfig {
 
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/users").permitAll()
+                .antMatchers("/api/competition").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER","ADMIN")
                 .and().formLogin().loginPage("/login")
