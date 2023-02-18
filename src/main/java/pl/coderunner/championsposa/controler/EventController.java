@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.coderunner.championsposa.domain.Event;
 import pl.coderunner.championsposa.service.EventService;
+import pl.coderunner.championsposa.service.dto.EventDto;
 
 @RestController
 @RequestMapping("/api")
@@ -16,7 +17,7 @@ public class EventController {
         this.eventService = eventService;
     }
     @GetMapping("/event/{id}")
-    public Event findEvent(@PathVariable("id") long id){
+    public EventDto findEvent(@PathVariable("id") long id){
        return eventService.findEvent(id);
 
     }

@@ -3,6 +3,7 @@ package pl.coderunner.championsposa.service;
 import org.springframework.stereotype.Service;
 import pl.coderunner.championsposa.domain.Event;
 import pl.coderunner.championsposa.repository.EventRepository;
+import pl.coderunner.championsposa.service.dto.EventDto;
 
 @Service
 public class EventService {
@@ -13,8 +14,17 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public Event findEvent(long id) {
+    public EventDto findEvent(long id) {
         Event event = eventRepository.findById(id);
-        return event;
+        EventDto eventDto=new EventDto();
+        eventDto.setId(event.getId());
+        eventDto.setName(event.getName());
+        eventDto.setDescription(event.getDescription());
+        eventDto.setEventAddress(event.getEventAddress());
+        eventDto.setAdministrator(event.getAdministrator());
+        eventDto.setCompetitionsList(event.getCompetitionsList());
+        eventDto.setLocalDate(event.getLocalDate());
+
+    return eventDto;
     }
 }

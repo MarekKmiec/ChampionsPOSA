@@ -37,8 +37,8 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         CriteriaQuery<Competition> cq = cb.createQuery(Competition.class);
 
         Root<Competition> competitionRoot = cq.from(Competition.class);
-        Join<Competition,CategoryOfAge> categoryOfAgeJoin=competitionRoot.join(Competition_.categoriesOfAge);
-//join
+        Join<Competition, CategoryOfAge> categoryOfAgeJoin = competitionRoot.join(Competition_.categoriesOfAge);
+
 
         Predicate namePredicate = cb.equal(competitionRoot.get("name"), name);
         Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get("categoriesOfAge"), categoriesOfAge);
@@ -46,14 +46,16 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         cq.where(namePredicate, categoriesPredicate);
 
         TypedQuery<Competition> query = entityManager.createQuery(cq);
-        return query.getResultList();
+
+        List<Competition> result = query.getResultList();
+        return result;
     }
 
     public Competition addCompetition(CompetitionDto competitionDto) {
         Competition newCompetition = new Competition();
         newCompetition.setName(competitionDto.getName());
-     CategoryOfAge categoryOfAge=new CategoryOfAge();
-     categoryOfAge.setCategoriesOfAge(competitionDto.getCategoriesOfAge());
+        CategoryOfAge categoryOfAge = new CategoryOfAge();
+        categoryOfAge.setCategoriesOfAge(competitionDto.getCategoriesOfAge());
 
 //        List<CategoryOfAge> CatAgeList=competitionDto.getCategoriesOfAgeList().stream()
 //                        .map(s->categoryOfAge.setCategoriesOfAge(s))
