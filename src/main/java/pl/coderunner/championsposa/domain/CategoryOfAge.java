@@ -4,10 +4,8 @@ package pl.coderunner.championsposa.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 @Entity
 @Getter
 @Setter
@@ -19,7 +17,7 @@ public class CategoryOfAge {
 
     private String categoriesOfAge;
 
-//    private String Varsity;
+    //    private String Varsity;
 //    private String JuniorA;
 //    private String JuniorB;
 //    private String DuetJunior;
@@ -30,8 +28,13 @@ public class CategoryOfAge {
 //    private String Master50;
 //    private String SeniorDuet;
 //    private String Exception;
+    public CategoryOfAge() {
 
+    }
 
+    public CategoryOfAge(String categoriesOfAge) {
+        this.categoriesOfAge = categoriesOfAge;
+    }
 }
 
 

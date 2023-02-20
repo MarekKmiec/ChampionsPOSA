@@ -1,5 +1,6 @@
 package pl.coderunner.championsposa.controler;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.coderunner.championsposa.domain.Competition;
 import pl.coderunner.championsposa.service.CompetitionService;

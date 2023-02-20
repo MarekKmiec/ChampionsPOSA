@@ -13,6 +13,12 @@ import java.util.List;
 public class CompetitionDto {
 
     private String name;
-//    private List<String> categoriesOfAgeList;
-    private String categoriesOfAge;
+
+    private List<String> categoriesOfAgeList;
+
+    public CompetitionDto(String name, List<String> categoriesOfAgeList) {
+        this.name = name;
+        this.categoriesOfAgeList = categoriesOfAgeList;
+    }
+    public CompetitionDto(){}
 }

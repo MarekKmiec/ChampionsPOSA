@@ -1,5 +1,6 @@
 package pl.coderunner.championsposa.service;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import pl.coderunner.championsposa.domain.CategoryOfAge;
 import pl.coderunner.championsposa.domain.CategoryOfAge_;
@@ -13,8 +14,10 @@ import pl.coderunner.championsposa.service.dto.CompetitionDto;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import javax.persistence.criteria.CriteriaQuery;
 
 @Service
 public class CompetitionService implements CompetitionRepositoryQuery {
@@ -37,13 +40,29 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         CriteriaQuery<Competition> cq = cb.createQuery(Competition.class);
 
         Root<Competition> competitionRoot = cq.from(Competition.class);
-        Join<Competition, CategoryOfAge> categoryOfAgeJoin = competitionRoot.join(Competition_.categoriesOfAge);
+        Join<Competition, CategoryOfAge> categoryOfAgeJoin = competitionRoot.join(Competition_.CATEGORIES_OF_AGE);
 
 
-        Predicate namePredicate = cb.equal(competitionRoot.get("name"), name);
-        Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get("categoriesOfAge"), categoriesOfAge);
 
-        cq.where(namePredicate, categoriesPredicate);
+        Predicate namePredicate = cb.equal(competitionRoot.get(Competition_.name), name);
+
+
+        Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
+
+        Predicate nameCatPredicate = cb.or(categoriesPredicate, namePredicate);
+
+//        cq.select(competitionRoot)
+//                .where(cb.or(nameCatPredicate,categoriesPredicate))
+//                .orderBy(cb.desc(competitionRoot.get("name")));
+
+        cq.select(competitionRoot);
+        cq.where(nameCatPredicate);
+
+//        cq.select(competitionRoot);
+//        cq.where(namePredicate);
+//        cq.where(categoriesPredicate);
+//        cq.orderBy(cb.asc(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge)));
+
 
         TypedQuery<Competition> query = entityManager.createQuery(cq);
 
@@ -51,18 +70,15 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         return result;
     }
 
-    public Competition addCompetition(CompetitionDto competitionDto) {
-        Competition newCompetition = new Competition();
-        newCompetition.setName(competitionDto.getName());
-        CategoryOfAge categoryOfAge = new CategoryOfAge();
-        categoryOfAge.setCategoriesOfAge(competitionDto.getCategoriesOfAge());
-
-//        List<CategoryOfAge> CatAgeList=competitionDto.getCategoriesOfAgeList().stream()
-//                        .map(s->categoryOfAge.setCategoriesOfAge(s))
-//                .collect(Collectors.toList();
-
-        newCompetition.setCategoriesOfAge(List.of(categoryOfAge));
-        competitionRepository.save(newCompetition);
-        return newCompetition;
+        public Competition addCompetition (CompetitionDto competitionDto){
+            Competition newCompetition = new Competition();
+            newCompetition.setName(competitionDto.getName());
+            List<CategoryOfAge> catAgeList = new ArrayList<>();
+            for (String str : competitionDto.getCategoriesOfAgeList()) {
+                catAgeList.add(categoryOfAgeRepository.findByCategoriesOfAge(str));
+            }
+            newCompetition.setCategoriesOfAge(catAgeList);
+            competitionRepository.save(newCompetition);
+            return newCompetition;
+        }
     }
-}

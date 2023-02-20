@@ -6,5 +6,5 @@ import pl.coderunner.championsposa.domain.CategoryOfAge;
 import java.util.List;
 
 public interface CategoryOfAgeRepository extends JpaRepository<CategoryOfAge,Long> {
-    List<CategoryOfAge> findByCategoriesOfAge(String categoriesOfAge);
+    CategoryOfAge findByCategoriesOfAge(String categoriesOfAge);
 }

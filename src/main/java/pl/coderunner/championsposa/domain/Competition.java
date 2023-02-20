@@ -17,4 +17,11 @@ public class Competition {
 
     @OneToMany
     private List<CategoryOfAge> categoriesOfAge;
+
+    public Competition(String name, List<CategoryOfAge> categoriesOfAge) {
+        this.name = name;
+        this.categoriesOfAge = categoriesOfAge;
+    }
+    public Competition(){
+    }
 }
