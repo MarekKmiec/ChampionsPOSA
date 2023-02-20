@@ -44,19 +44,27 @@ public class CompetitionService implements CompetitionRepositoryQuery {
 
 
 
-        Predicate namePredicate = cb.equal(competitionRoot.get(Competition_.name), name);
+        List<Predicate> namePredicate = getPredicationCompetition(name,cb,competitionRoot);
+        List<Predicate> predicateListCategory=getPredicateCategory(categoriesOfAge,cb,categoryOfAgeJoin);
 
 
-        Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
 
-        Predicate nameCatPredicate = cb.or(categoriesPredicate, namePredicate);
+
+//        Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
+//
+//        Predicate nameCatPredicate = cb.or(categoriesPredicate, namePredicate);
 
 //        cq.select(competitionRoot)
 //                .where(cb.or(nameCatPredicate,categoriesPredicate))
 //                .orderBy(cb.desc(competitionRoot.get("name")));
 
         cq.select(competitionRoot);
-        cq.where(nameCatPredicate);
+        cq.where(
+                cb.and(namePredicate.toArray(new Predicate[]{})),
+                cb.and(predicateListCategory.toArray(new Predicate[]{})));
+
+
+
 
 //        cq.select(competitionRoot);
 //        cq.where(namePredicate);
@@ -68,6 +76,26 @@ public class CompetitionService implements CompetitionRepositoryQuery {
 
         List<Competition> result = query.getResultList();
         return result;
+    }
+
+    private List<Predicate> getPredicationCompetition(String name, CriteriaBuilder cb, Root<Competition> competitionRoot){
+       List<Predicate> predicateList=new ArrayList<>();
+
+        if(name!=null){
+            Predicate namePredicate = cb.equal(competitionRoot.get(Competition_.name), name);
+            predicateList.add(namePredicate);
+        }
+        return predicateList;
+    }
+
+    private List<Predicate> getPredicateCategory(String categoriesOfAge,CriteriaBuilder cb,Join<Competition, CategoryOfAge> categoryOfAgeJoin){
+        List<Predicate> predicateListCategory=new ArrayList<>();
+        if(categoriesOfAge!=null) {
+            Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
+            predicateListCategory.add(categoriesPredicate);
+        }
+
+        return predicateListCategory;
     }
 
         public Competition addCompetition (CompetitionDto competitionDto){
