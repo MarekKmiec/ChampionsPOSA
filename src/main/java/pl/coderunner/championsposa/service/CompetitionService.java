@@ -43,33 +43,16 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         Join<Competition, CategoryOfAge> categoryOfAgeJoin = competitionRoot.join(Competition_.CATEGORIES_OF_AGE);
 
 
+        List<Predicate> nameListPredicate = getPredicationCompetition(name, cb, competitionRoot);
+        List<Predicate> predicateListCategory = getPredicateCategory(categoriesOfAge, cb, categoryOfAgeJoin);
 
-        List<Predicate> namePredicate = getPredicationCompetition(name,cb,competitionRoot);
-        List<Predicate> predicateListCategory=getPredicateCategory(categoriesOfAge,cb,categoryOfAgeJoin);
-
-
-
-
-//        Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
-//
-//        Predicate nameCatPredicate = cb.or(categoriesPredicate, namePredicate);
-
-//        cq.select(competitionRoot)
-//                .where(cb.or(nameCatPredicate,categoriesPredicate))
-//                .orderBy(cb.desc(competitionRoot.get("name")));
 
         cq.select(competitionRoot);
         cq.where(
-                cb.and(namePredicate.toArray(new Predicate[]{})),
+                cb.and(nameListPredicate.toArray(new Predicate[]{})),
                 cb.and(predicateListCategory.toArray(new Predicate[]{})));
-
-
-
-
-//        cq.select(competitionRoot);
-//        cq.where(namePredicate);
-//        cq.where(categoriesPredicate);
-//        cq.orderBy(cb.asc(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge)));
+//                cb.and(nameListPredicate.get(0),
+//        cb.and(predicateListCategory.get(0))));
 
 
         TypedQuery<Competition> query = entityManager.createQuery(cq);
@@ -78,19 +61,19 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         return result;
     }
 
-    private List<Predicate> getPredicationCompetition(String name, CriteriaBuilder cb, Root<Competition> competitionRoot){
-       List<Predicate> predicateList=new ArrayList<>();
+    private List<Predicate> getPredicationCompetition(String name, CriteriaBuilder cb, Root<Competition> competitionRoot) {
+        List<Predicate> predicateList = new ArrayList<>();
 
-        if(name!=null){
+        if (name != null) {
             Predicate namePredicate = cb.equal(competitionRoot.get(Competition_.name), name);
             predicateList.add(namePredicate);
         }
         return predicateList;
     }
 
-    private List<Predicate> getPredicateCategory(String categoriesOfAge,CriteriaBuilder cb,Join<Competition, CategoryOfAge> categoryOfAgeJoin){
-        List<Predicate> predicateListCategory=new ArrayList<>();
-        if(categoriesOfAge!=null) {
+    private List<Predicate> getPredicateCategory(String categoriesOfAge, CriteriaBuilder cb, Join<Competition, CategoryOfAge> categoryOfAgeJoin) {
+        List<Predicate> predicateListCategory = new ArrayList<>();
+        if (categoriesOfAge != null) {
             Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
             predicateListCategory.add(categoriesPredicate);
         }
@@ -98,15 +81,15 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         return predicateListCategory;
     }
 
-        public Competition addCompetition (CompetitionDto competitionDto){
-            Competition newCompetition = new Competition();
-            newCompetition.setName(competitionDto.getName());
-            List<CategoryOfAge> catAgeList = new ArrayList<>();
-            for (String str : competitionDto.getCategoriesOfAgeList()) {
-                catAgeList.add(categoryOfAgeRepository.findByCategoriesOfAge(str));
-            }
-            newCompetition.setCategoriesOfAge(catAgeList);
-            competitionRepository.save(newCompetition);
-            return newCompetition;
+    public Competition addCompetition(CompetitionDto competitionDto) {
+        Competition newCompetition = new Competition();
+        newCompetition.setName(competitionDto.getName());
+        List<CategoryOfAge> catAgeList = new ArrayList<>();
+        for (String str : competitionDto.getCategoriesOfAgeList()) {
+            catAgeList.add(categoryOfAgeRepository.findByCategoriesOfAge(str));
         }
+        newCompetition.setCategoriesOfAge(catAgeList);
+        competitionRepository.save(newCompetition);
+        return newCompetition;
     }
+}
