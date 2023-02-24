@@ -15,7 +15,8 @@ public class Competition {
     private Long Id;
     private String name;
 
-    @OneToMany
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "competition_id")
     private List<CategoryOfAge> categoriesOfAge;
 
     public Competition(String name, List<CategoryOfAge> categoriesOfAge) {

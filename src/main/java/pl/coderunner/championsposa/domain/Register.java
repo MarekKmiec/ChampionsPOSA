@@ -15,9 +15,13 @@ public class Register {
     private Long Id;
     @OneToOne
     private User user;
-    @OneToMany
-    private List<Competition> competitions;
+    @OneToOne
+    private Competition competitions;
     @OneToOne
     private CategoryOfAge categoriesOfAge;
+
+    private Boolean isPay;
+
+    private String key;
 
 }

@@ -22,6 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findOneWithAuthoritiesByUsernameIgnoreCase(String username);
 
     User findByUsername(String username);
+    User findById(long id);
     @Modifying
     @Query("delete from User u where u.Id=:id")
     void deleteUser(long id);

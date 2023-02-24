@@ -61,6 +61,7 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         return result;
     }
 
+
     private List<Predicate> getPredicationCompetition(String name, CriteriaBuilder cb, Root<Competition> competitionRoot) {
         List<Predicate> predicateList = new ArrayList<>();
 
@@ -86,7 +87,8 @@ public class CompetitionService implements CompetitionRepositoryQuery {
         newCompetition.setName(competitionDto.getName());
         List<CategoryOfAge> catAgeList = new ArrayList<>();
         for (String str : competitionDto.getCategoriesOfAgeList()) {
-            catAgeList.add(categoryOfAgeRepository.findByCategoriesOfAge(str));
+//            catAgeList.add(categoryOfAgeRepository.findByCategoriesOfAge(str));
+            catAgeList.add(new CategoryOfAge(str));
         }
         newCompetition.setCategoriesOfAge(catAgeList);
         competitionRepository.save(newCompetition);

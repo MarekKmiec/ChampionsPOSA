@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface CategoryOfAgeRepository extends JpaRepository<CategoryOfAge,Long> {
     CategoryOfAge findByCategoriesOfAge(String categoriesOfAge);
+    CategoryOfAge findById(long id);
 }

@@ -16,6 +16,8 @@ public class CategoryOfAge {
     private Long Id;
 
     private String categoriesOfAge;
+    @ManyToOne
+    private Competition competition;
 
     //    private String Varsity;
 //    private String JuniorA;
