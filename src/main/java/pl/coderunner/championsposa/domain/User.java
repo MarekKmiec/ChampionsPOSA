@@ -87,16 +87,13 @@ public class User {
     private Set<Role> roles=new HashSet<>();
 
 
-//    @OneToOne
-//    @JoinColumn(name = "register_id")
-//    private Register register;
 
 
-//    @OneToMany
-//    private List<UserAddress> userAddress;
-//    @OneToOne
-//    private UserData userData;
-//    @OneToMany
-//    private List<UserPlayerProfile> playerProfileLiat;
+    @OneToMany
+    private List<UserAddress> userAddress;
+    @OneToOne
+    private UserData userData;
+    @OneToMany
+    private List<UserPlayerProfile> userPlayerProfileList;
 
 }
