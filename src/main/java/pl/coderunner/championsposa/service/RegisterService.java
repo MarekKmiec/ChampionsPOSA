@@ -8,7 +8,9 @@ import pl.coderunner.championsposa.repository.RegisterRepository;
 import pl.coderunner.championsposa.repository.UserRepository;
 import pl.coderunner.championsposa.service.dto.RegisterDto;
 
+import java.util.List;
 import java.util.UUID;
+
 @Service
 public class RegisterService {
     private final RegisterRepository registerRepository;
@@ -23,19 +25,33 @@ public class RegisterService {
         this.userRepository = userRepository;
     }
 
-    public Register saveRegister(RegisterDto registerDto){
-        String key= UUID.randomUUID().toString();
-        Register register=new Register();
-        register.setUser(userRepository.findById(registerDto.getUserId()));
-        for (int i = 0; i < registerDto.getCompetitionID(); i++) {
-            register.setCompetitions(competitionRepository.findById(i));
+    public Register saveRegister(List<RegisterDto> registerDto) {
+        String key = UUID.randomUUID().toString();
+        Register register = new Register();
+        for (RegisterDto regdto : registerDto) {
+            register.setUser(userRepository.findById(regdto.getUserId()));
+            register.setCompetition(competitionRepository.findById(regdto.getCompetitionID()));
+            register.setCategoryOfAge(categoryOfAgeRepository.findById(regdto.getCategoryOfAgeId()));
         }
-        for (int i = 0; i < registerDto.getCategoryOfAgeId(); i++) {
-            register.setCategoriesOfAge(categoryOfAgeRepository.findById(i));
-        }
-        register.setKey(key);
+        register.setRegisterKey(key);
         register.setIsPay(false);
         registerRepository.save(register);
+
+//        Register register = new Register();
+//        register.setUser(userRepository.findById(registerDto.getUserId()));
+//        register.setCompetition(competitionRepository.findById(registerDto.getCompetitionID()));
+//        register.setCategoryOfAge(categoryOfAgeRepository.findById(registerDto.getCategoryOfAgeId()));
+//        register.setKey(key);
+//        register.setIsPay(false);
+//        registerRepository.save(register);
+        return register;
+
+    }
+
+    public Register activeRegister(String registerKey){
+        Register register= registerRepository.findByRegisterKey(registerKey);
+        register.setIsPay(true);
+        register.setRegisterKey(null);
         return register;
 
     }

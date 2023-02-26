@@ -4,24 +4,35 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
+
 public class Register {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @OneToOne
+//            (mappedBy ="register" )
+            (cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+
     private User user;
     @OneToOne
-    private Competition competitions;
+//            (mappedBy = "register")
+            (cascade = CascadeType.ALL)
+    @JoinColumn(name = "competition_id")
+    private Competition competition;
     @OneToOne
-    private CategoryOfAge categoriesOfAge;
+//            (mappedBy = "register")
+            (cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoryOfAge_id")
+    private CategoryOfAge categoryOfAge;
 
     private Boolean isPay;
 
-    private String key;
+    private String registerKey;
+
 
 }

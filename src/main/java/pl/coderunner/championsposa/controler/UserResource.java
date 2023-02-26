@@ -30,12 +30,12 @@ public class UserResource {
 
     private final UserRepository userRepository;
 
-    private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+
+    public UserResource(UserService userService, UserRepository userRepository) {
         this.userService = userService;
         this.userRepository = userRepository;
-        this.mailService = mailService;
+
     }
 
 
@@ -53,7 +53,7 @@ public class UserResource {
             throw new CreatedExceptions("uzytkownik o tym adresie email istnieje");
         } else {
             newUser = userService.createUser(userDto);
-            mailService.sendActivationEmail(newUser);
+
         }
 
         return newUser;

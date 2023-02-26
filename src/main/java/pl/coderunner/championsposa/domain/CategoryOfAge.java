@@ -15,9 +15,13 @@ public class CategoryOfAge {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    private String categoriesOfAge;
-    @ManyToOne
-    private Competition competition;
+    private String categoryOfAge;
+//    @ManyToOne
+//    private Competition competition;
+
+//    @OneToOne
+////    @JoinColumn(name = "register_id")
+//    private Register register;
 
     //    private String Varsity;
 //    private String JuniorA;
@@ -35,7 +39,7 @@ public class CategoryOfAge {
     }
 
     public CategoryOfAge(String categoriesOfAge) {
-        this.categoriesOfAge = categoriesOfAge;
+        this.categoryOfAge = categoriesOfAge;
     }
 }
 

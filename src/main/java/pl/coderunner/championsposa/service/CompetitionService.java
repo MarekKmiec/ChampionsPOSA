@@ -75,7 +75,7 @@ public class CompetitionService implements CompetitionRepositoryQuery {
     private List<Predicate> getPredicateCategory(String categoriesOfAge, CriteriaBuilder cb, Join<Competition, CategoryOfAge> categoryOfAgeJoin) {
         List<Predicate> predicateListCategory = new ArrayList<>();
         if (categoriesOfAge != null) {
-            Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoriesOfAge), categoriesOfAge);
+            Predicate categoriesPredicate = cb.equal(categoryOfAgeJoin.get(CategoryOfAge_.categoryOfAge), categoriesOfAge);
             predicateListCategory.add(categoriesPredicate);
         }
 

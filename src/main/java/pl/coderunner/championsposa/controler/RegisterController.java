@@ -8,6 +8,8 @@ import pl.coderunner.championsposa.domain.Register;
 import pl.coderunner.championsposa.service.RegisterService;
 import pl.coderunner.championsposa.service.dto.RegisterDto;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class RegisterController {
@@ -17,7 +19,7 @@ public class RegisterController {
         this.registerService = registerService;
     }
     @PostMapping("/register")
-    public Register saveRegister(@RequestBody RegisterDto registerDto){
+    public Register saveRegister(@RequestBody List<RegisterDto> registerDto){
         Register newRegister;
         newRegister=registerService.saveRegister(registerDto);
         return newRegister;

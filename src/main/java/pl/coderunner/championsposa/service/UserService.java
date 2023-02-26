@@ -11,6 +11,7 @@ import pl.coderunner.championsposa.repository.RoleRepository;
 import pl.coderunner.championsposa.repository.UserRepository;
 import pl.coderunner.championsposa.service.dto.UserDto;
 
+import javax.mail.MessagingException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
@@ -24,17 +25,20 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final PersistentTokenRepository persistentTokenRepository;
     private final RoleRepository roleRepository;
+    private final MailService mailService;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PersistentTokenRepository persistentTokenRepository, RoleRepository roleRepository, MailService mailService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.persistentTokenRepository = persistentTokenRepository;
         this.roleRepository = roleRepository;
 
+        this.mailService = mailService;
     }
 
-    public User createUser(UserDto userDto) {
+  @Transactional
+    public User createUser(UserDto userDto) throws MessagingException {
         User user = new User();
         if (userDto.getUsername() != null) {
             user.setUsername(userDto.getUsername().toLowerCase());
@@ -46,6 +50,7 @@ public class UserService {
             userRepository.save(user);
             log.debug("Created Information for User: {}", user);
         }
+        mailService.sendActivationEmail(user);
 
         return user;
     }
