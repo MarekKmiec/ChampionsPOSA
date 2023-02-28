@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import pl.coderunner.championsposa.domain.User;
+import pl.coderunner.championsposa.domain.UserAddress;
+import pl.coderunner.championsposa.domain.UserData;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Email;
@@ -39,9 +41,10 @@ public class UserDto implements Serializable {
     private LocalDateTime createdOn;
     private LocalDateTime updateOn;
     private Set<String> roles;
-//
-//    public UserDto() {
-//
+    private UserDataDto userDataDto;
+    private UserAddressDto userAddressDto;
+
+
 //    }
 //
 //    public UserDto(User user) {

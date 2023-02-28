@@ -89,9 +89,10 @@ public class User {
 
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
     private List<UserAddress> userAddress;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private UserData userData;
     @OneToMany
     private List<UserPlayerProfile> userPlayerProfileList;
